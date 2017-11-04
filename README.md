@@ -1,2 +1,3 @@
 # PoissReg
-dataflow implementation for class
+dataflow implementation for class.
+compiles on maxIDE.
