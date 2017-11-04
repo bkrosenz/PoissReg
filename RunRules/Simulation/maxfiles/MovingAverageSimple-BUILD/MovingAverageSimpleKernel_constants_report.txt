@@ -1,0 +1,27 @@
+Warning (CONSTANT_ENCODING):
+Constant with value 0.6931471805599453 does not fit exactly into type {HWOffsetFix:14, -14, UNSIGNED}:
+PRECISION_LOSS: not all of the constant's bits fit into new type, resulting value: 0.69317626953125
+Origin of related node:
+com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.<init>(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)
+
+Warning (CONSTANT_ENCODING):
+Constant with value 0.01 does not fit exactly into type {HWFloat:8, 24}:
+PRECISION_LOSS: not all of the constant's bits fit into new type, resulting value: 0.009999999776482582
+Origin of related node:
+com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mulAsRHS(DFEVar.java:993)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.<init>(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)
+
+Warning (CONSTANT_ENCODING):
+Constant with value 1.4426950408889634 does not fit exactly into type {HWOffsetFix:36, -26, TWOSCOMPLEMENT}:
+PRECISION_LOSS: not all of the constant's bits fit into new type, resulting value: 1.4426950365304947
+Origin of related node:
+com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.<init>(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)
+

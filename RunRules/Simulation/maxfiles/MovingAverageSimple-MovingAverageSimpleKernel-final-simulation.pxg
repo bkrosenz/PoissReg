@@ -1,0 +1,2401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Graph version="2015.2" pxg_version="1" maxfile_name="MovingAverageSimple" design_name="MovingAverageSimpleKernel" compilation_phase="final-simulation" has_longest_path="false">
+	<Node group="[]" id="102" isControl="true" isVisible="false" pipelineFactor="1.0" type="NodeInputMappedReg">
+		<Output latency="0" name="io_beta_force_disabled" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>Scalar input (io_beta_force_disabled)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:51)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Name>io_beta_force_disabled</Name>
+	</Node>
+	<Edge dst_node_id="103" dst_node_input="a" src_node_id="102" src_node_output="io_beta_force_disabled" />
+	<Node group="[]" id="103" isControl="true" isVisible="false" pipelineFactor="0.0" type="NodeNot">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="0" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>~</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:51)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="105" dst_node_input="output_control" src_node_id="103" src_node_output="result" />
+	<Node group="[]" id="2" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Count.makeCounterChain(Count.java:498)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:37)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>1</Value>
+		<HexValue>0x1</HexValue>
+		<NumericValue>1.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="5" dst_node_input="enable" src_node_id="2" src_node_output="value" />
+	<Node group="[]" id="146" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(8, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:8, 0, UNSIGNED}\n0x58; 88.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream$OffsetExpr.getDFEVar(Stream.java:183)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:33)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>01011000</Value>
+		<HexValue>0x58</HexValue>
+		<NumericValue>88.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="5" dst_node_input="max" src_node_id="146" src_node_output="value" />
+	<Node group="[]" id="5" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCounterV1">
+		<Input name="enable" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="max" type="dfeOffsetFix(8, 0, UNSIGNED)" />
+		<Output latency="0" name="count" type="dfeOffsetFix(8, 0, UNSIGNED)" />
+		<Output latency="0" name="wrap" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain.addCounter(CounterChain.java:526)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:39)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Increment>1</Increment>
+		<WrapValue>0</WrapValue>
+		<InitValue>0</InitValue>
+		<CountMode>NUMERIC_INCREMENTING</CountMode>
+		<WrapMode>COUNT_LT_MAX_THEN_WRAP</WrapMode>
+	</Node>
+	<Edge dst_node_id="7" dst_node_input="a" src_node_id="5" src_node_output="count" />
+	<Edge dst_node_id="13" dst_node_input="a" src_node_id="5" src_node_output="count" />
+	<Edge dst_node_id="4" dst_node_input="enable" src_node_id="5" src_node_output="wrap" />
+	<Node group="[]" id="0" isControl="true" isVisible="true" pipelineFactor="1.0" type="NodeInputMappedReg">
+		<Output latency="0" name="dataPoints" type="dfeFloat(8, 24)" />
+		<Text>Scalar input (dataPoints)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.scalarInput(IO.java:1106)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:28)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Name>dataPoints</Name>
+	</Node>
+	<Edge dst_node_id="3" dst_node_input="i" src_node_id="0" src_node_output="dataPoints" />
+	<Node group="[]" id="3" isControl="true" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeFloat(8, 24)" />
+		<Output latency="6" name="o" type="dfeOffsetFix(32, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:32, 0, UNSIGNED}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.cast(DFEVar.java:173)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:38)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="4" dst_node_input="max" src_node_id="3" src_node_output="o" />
+	<Node group="[]" id="4" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCounterV1">
+		<Input name="enable" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="max" type="dfeOffsetFix(32, 0, UNSIGNED)" />
+		<Output latency="0" name="count" type="dfeOffsetFix(32, 0, UNSIGNED)" />
+		<Output latency="0" name="wrap" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.CounterChain.addCounter(CounterChain.java:526)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:38)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Increment>1</Increment>
+		<WrapValue>0</WrapValue>
+		<InitValue>0</InitValue>
+		<CountMode>NUMERIC_INCREMENTING</CountMode>
+		<WrapMode>COUNT_LT_MAX_THEN_WRAP</WrapMode>
+	</Node>
+	<Edge dst_node_id="19" dst_node_input="a" src_node_id="4" src_node_output="count" />
+	<Node group="[]" id="158" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(32, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:32, 0, UNSIGNED}\n0x00000000; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:597)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:59)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>00000000000000000000000000000000</Value>
+		<HexValue>0x00000000</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="19" dst_node_input="b" src_node_id="158" src_node_output="value" />
+	<Node group="[]" id="19" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeEq">
+		<Input name="a" type="dfeOffsetFix(32, 0, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(32, 0, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>==</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:597)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:59)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="126" dst_node_input="input" src_node_id="19" src_node_output="result" />
+	<Node group="[]" id="126" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="4" name="output" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>FIFO(4)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="21" dst_node_input="sel" src_node_id="126" src_node_output="output" />
+	<Node group="[]" id="125" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeStreamOffset">
+		<Input name="input" type="dfeFloat(8, 24)" />
+		<Output latency="-88" name="output" type="dfeFloat(8, 24)" />
+		<Text>stream offset: -88</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.Stream.offset(Stream.java:247)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:61)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="21" dst_node_input="option0" src_node_id="125" src_node_output="output" />
+	<Node group="[]" id="20" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeFloat(8, 24)" />
+		<Text>{HWFloat:8, 24}\n0x00000000; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.ternaryIf(DFEVar.java:1181)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:59)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>00000000000000000000000000000000</Value>
+		<HexValue>0x00000000</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="21" dst_node_input="option1" src_node_id="20" src_node_output="value" />
+	<Node group="[]" id="21" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeMux">
+		<Input name="sel" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="option0" type="dfeFloat(8, 24)" />
+		<Input name="option1" type="dfeFloat(8, 24)" />
+		<Output latency="1" name="result" type="dfeFloat(8, 24)" />
+		<Text>MUX</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.ternaryIf(DFEVar.java:1181)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:59)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="22" dst_node_input="b" src_node_id="21" src_node_output="result" />
+	<Edge dst_node_id="143" dst_node_input="input" src_node_id="21" src_node_output="result" />
+	<Node group="[]" id="143" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeFloat(8, 24)" />
+		<Output latency="73" name="output" type="dfeFloat(8, 24)" />
+		<Text>FIFO(73)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="99" dst_node_input="a" src_node_id="143" src_node_output="output" />
+	<Node group="[]" id="157" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeFloat(8, 24)" />
+		<Text>{HWFloat:8, 24}\n0x3c23d70a; 0.009999999776482582</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mulAsRHS(DFEVar.java:993)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>00111100001000111101011100001010</Value>
+		<HexValue>0x3c23d70a</HexValue>
+		<NumericValue>0.009999999776482582</NumericValue>
+	</Node>
+	<Edge dst_node_id="98" dst_node_input="a" src_node_id="157" src_node_output="value" />
+	<Node group="[]" id="156" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(8, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:8, 0, UNSIGNED}\n0x00; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:597)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:43)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>00000000</Value>
+		<HexValue>0x00</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="7" dst_node_input="b" src_node_id="156" src_node_output="value" />
+	<Node group="[]" id="7" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeEq">
+		<Input name="a" type="dfeOffsetFix(8, 0, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(8, 0, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>==</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:597)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:43)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="10" dst_node_input="a" src_node_id="7" src_node_output="result" />
+	<Node group="[]" id="8" isControl="true" isVisible="false" pipelineFactor="1.0" type="NodeInputMappedReg">
+		<Output latency="0" name="io_x_force_disabled" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>Scalar input (io_x_force_disabled)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:43)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Name>io_x_force_disabled</Name>
+	</Node>
+	<Edge dst_node_id="9" dst_node_input="a" src_node_id="8" src_node_output="io_x_force_disabled" />
+	<Node group="[]" id="9" isControl="true" isVisible="false" pipelineFactor="0.0" type="NodeNot">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="0" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>~</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:43)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="10" dst_node_input="b" src_node_id="9" src_node_output="result" />
+	<Node group="[]" id="10" isControl="false" isVisible="false" pipelineFactor="0.0" type="NodeAnd">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="0" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>&amp;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:43)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="11" dst_node_input="enable" src_node_id="10" src_node_output="result" />
+	<Node group="[]" id="11" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeInput">
+		<Input name="enable" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="5" name="data" type="dfeFloat(8, 24)" />
+		<Text>Input(x)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:43)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Name>x</Name>
+	</Node>
+	<Edge dst_node_id="22" dst_node_input="a" src_node_id="11" src_node_output="data" />
+	<Edge dst_node_id="141" dst_node_input="input" src_node_id="11" src_node_output="data" />
+	<Node group="[]" id="141" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeFloat(8, 24)" />
+		<Output latency="37" name="output" type="dfeFloat(8, 24)" />
+		<Text>FIFO(37)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="95" dst_node_input="a" src_node_id="141" src_node_output="output" />
+	<Node group="[]" id="22" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeMul">
+		<Input name="a" type="dfeFloat(8, 24)" />
+		<Input name="b" type="dfeFloat(8, 24)" />
+		<Output latency="11" name="result" type="dfeFloat(8, 24)" />
+		<Text>*</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="24" dst_node_input="input" src_node_id="22" src_node_output="result" />
+	<Edge dst_node_id="29" dst_node_input="a" src_node_id="22" src_node_output="result" />
+	<Edge dst_node_id="33" dst_node_input="a" src_node_id="22" src_node_output="result" />
+	<Node group="[]" id="23" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:1, 0, UNSIGNED}\n0x0; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>0</Value>
+		<HexValue>0x0</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="24" dst_node_input="doubt" src_node_id="23" src_node_output="value" />
+	<Node group="[]" id="24" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeDoubtBitOp">
+		<Input name="input" type="dfeFloat(8, 24)" />
+		<Input name="doubt" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="0" name="output" type="dfeFloat(8, 24)" />
+		<Text>DoubtBitOp(ADD_DOUBT)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="25" dst_node_input="i" src_node_id="24" src_node_output="output" />
+	<Node group="[]" id="25" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeFloat(8, 24)" />
+		<Output latency="5" name="o" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Text>{HWOffsetFix:36, -26, TWOSCOMPLEMENT}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="27" dst_node_input="a" src_node_id="25" src_node_output="o" />
+	<Node group="[]" id="155" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Text>{HWOffsetFix:36, -26, TWOSCOMPLEMENT}\n0x005c551d9; 1.4426950365304947</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>000000000101110001010101000111011001</Value>
+		<HexValue>0x005c551d9</HexValue>
+		<NumericValue>1.4426950365304947</NumericValue>
+	</Node>
+	<Edge dst_node_id="27" dst_node_input="b" src_node_id="155" src_node_output="value" />
+	<Node group="[]" id="27" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeMul">
+		<Input name="a" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Input name="b" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Output latency="3" name="result" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Text>*</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="30" dst_node_input="input" src_node_id="27" src_node_output="result" />
+	<Edge dst_node_id="34" dst_node_input="input" src_node_id="27" src_node_output="result" />
+	<Edge dst_node_id="36" dst_node_input="input" src_node_id="27" src_node_output="result" />
+	<Node group="[]" id="36" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeDoubtBitOp">
+		<Input name="input" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Output latency="0" name="output" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Text>DoubtBitOp(REMOVE_DOUBT)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="37" dst_node_input="i" src_node_id="36" src_node_output="output" />
+	<Edge dst_node_id="38" dst_node_input="i" src_node_id="36" src_node_output="output" />
+	<Edge dst_node_id="39" dst_node_input="i" src_node_id="36" src_node_output="output" />
+	<Edge dst_node_id="40" dst_node_input="i" src_node_id="36" src_node_output="output" />
+	<Node group="[]" id="37" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Output latency="0" name="o" type="dfeOffsetFix(10, 0, TWOSCOMPLEMENT)" />
+		<Text>{HWOffsetFix:10, 0, TWOSCOMPLEMENT}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="127" dst_node_input="input" src_node_id="37" src_node_output="o" />
+	<Node group="[]" id="127" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(10, 0, TWOSCOMPLEMENT)" />
+		<Output latency="13" name="output" type="dfeOffsetFix(10, 0, TWOSCOMPLEMENT)" />
+		<Text>FIFO(13)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="58" dst_node_input="i" src_node_id="127" src_node_output="output" />
+	<Node group="[]" id="58" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeOffsetFix(10, 0, TWOSCOMPLEMENT)" />
+		<Output latency="0" name="o" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Text>{HWOffsetFix:11, 0, TWOSCOMPLEMENT}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="122" dst_node_input="a" src_node_id="58" src_node_output="o" />
+	<Node group="[]" id="61" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Text>{HWOffsetFix:11, 0, TWOSCOMPLEMENT}\n0x001; 1.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>00000000001</Value>
+		<HexValue>0x001</HexValue>
+		<NumericValue>1.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="122" dst_node_input="b" src_node_id="61" src_node_output="value" />
+	<Node group="[]" id="120" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Text>{HWOffsetFix:11, 0, TWOSCOMPLEMENT}\n0x07f; 127.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+		<Value>00001111111</Value>
+		<HexValue>0x07f</HexValue>
+		<NumericValue>127.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="122" dst_node_input="c" src_node_id="120" src_node_output="value" />
+	<Node group="[]" id="39" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Output latency="0" name="o" type="dfeOffsetFix(10, -12, UNSIGNED)" />
+		<Text>{HWOffsetFix:10, -12, UNSIGNED}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="92" dst_node_input="input" src_node_id="39" src_node_output="o" />
+	<Node group="[]" id="92" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeReinterpret">
+		<Input name="input" type="dfeOffsetFix(10, -12, UNSIGNED)" />
+		<Output latency="0" name="output" type="dfeBits(10)" />
+		<Text>&lt;{HWRawBits:10}&gt;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="93" dst_node_input="input" src_node_id="92" src_node_output="output" />
+	<Node group="[]" id="93" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeReinterpret">
+		<Input name="input" type="dfeBits(10)" />
+		<Output latency="0" name="output" type="dfeOffsetFix(10, 0, UNSIGNED)" />
+		<Text>&lt;{HWOffsetFix:10, 0, UNSIGNED}&gt;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="128" dst_node_input="input" src_node_id="93" src_node_output="output" />
+	<Node group="[]" id="128" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(10, 0, UNSIGNED)" />
+		<Output latency="5" name="output" type="dfeOffsetFix(10, 0, UNSIGNED)" />
+		<Text>FIFO(5)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="94" dst_node_input="addr" src_node_id="128" src_node_output="output" />
+	<Node group="[]" id="94" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeROM">
+		<Input name="addr" type="dfeOffsetFix(10, 0, UNSIGNED)" />
+		<Output latency="2" name="dout" type="dfeOffsetFix(22, -24, UNSIGNED)" />
+		<Text>ROM</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Depth>1024</Depth>
+		<MemoryData>0x000000
+0x000b17
+0x00162f
+0x002148
+0x002c60
+0x00377a
+0x004293
+0x004dae
+0x0058c8
+0x0063e4
+0x006eff
+0x007a1c
+0x008538
+0x009055
+0x009b73
+0x00a691
+0x00b1b0
+0x00bccf
+0x00c7ee
+0x00d30e
+0x00de2f
+0x00e950
+0x00f471
+0x00ff93
+0x010ab6
+0x0115d9
+0x0120fc
+0x012c20
+0x013744
+0x014269
+0x014d8e
+0x0158b4
+0x0163db
+0x016f01
+0x017a29
+0x018550
+0x019079
+0x019ba1
+0x01a6cb
+0x01b1f4
+0x01bd1e
+0x01c849
+0x01d374
+0x01dea0
+0x01e9cc
+0x01f4f9
+0x020026
+0x020b53
+0x021681
+0x0221b0
+0x022cdf
+0x02380e
+0x02433e
+0x024e6f
+0x0259a0
+0x0264d1
+0x027003
+0x027b35
+0x028668
+0x02919c
+0x029cd0
+0x02a804
+0x02b339
+0x02be6e
+0x02c9a4
+0x02d4da
+0x02e011
+0x02eb48
+0x02f680
+0x0301b8
+0x030cf1
+0x03182a
+0x032364
+0x032e9e
+0x0339d9
+0x034514
+0x03504f
+0x035b8c
+0x0366c8
+0x037205
+0x037d43
+0x038881
+0x0393c0
+0x039eff
+0x03aa3e
+0x03b57e
+0x03c0bf
+0x03cc00
+0x03d741
+0x03e283
+0x03edc6
+0x03f908
+0x04044c
+0x040f90
+0x041ad4
+0x042619
+0x04315f
+0x043ca4
+0x0447eb
+0x045332
+0x045e79
+0x0469c1
+0x047509
+0x048052
+0x048b9b
+0x0496e5
+0x04a22f
+0x04ad7a
+0x04b8c5
+0x04c411
+0x04cf5d
+0x04daaa
+0x04e5f7
+0x04f145
+0x04fc93
+0x0507e2
+0x051331
+0x051e81
+0x0529d1
+0x053521
+0x054072
+0x054bc4
+0x055716
+0x056269
+0x056dbc
+0x057910
+0x058464
+0x058fb8
+0x059b0d
+0x05a663
+0x05b1b9
+0x05bd0f
+0x05c866
+0x05d3be
+0x05df16
+0x05ea6e
+0x05f5c7
+0x060121
+0x060c7b
+0x0617d5
+0x062330
+0x062e8c
+0x0639e8
+0x064544
+0x0650a1
+0x065bfe
+0x06675c
+0x0672bb
+0x067e19
+0x068979
+0x0694d9
+0x06a039
+0x06ab9a
+0x06b6fb
+0x06c25d
+0x06cdc0
+0x06d922
+0x06e486
+0x06efe9
+0x06fb4e
+0x0706b3
+0x071218
+0x071d7e
+0x0728e4
+0x07344b
+0x073fb2
+0x074b1a
+0x075682
+0x0761eb
+0x076d54
+0x0778be
+0x078428
+0x078f93
+0x079afe
+0x07a66a
+0x07b1d6
+0x07bd43
+0x07c8b0
+0x07d41e
+0x07df8c
+0x07eafb
+0x07f66a
+0x0801d9
+0x080d4a
+0x0818ba
+0x08242b
+0x082f9d
+0x083b0f
+0x084682
+0x0851f5
+0x085d69
+0x0868dd
+0x087452
+0x087fc7
+0x088b3c
+0x0896b2
+0x08a229
+0x08ada0
+0x08b918
+0x08c490
+0x08d009
+0x08db82
+0x08e6fb
+0x08f275
+0x08fdf0
+0x09096b
+0x0914e7
+0x092063
+0x092bdf
+0x09375c
+0x0942da
+0x094e58
+0x0959d7
+0x096556
+0x0970d5
+0x097c56
+0x0987d6
+0x099357
+0x099ed9
+0x09aa5b
+0x09b5dd
+0x09c160
+0x09cce4
+0x09d868
+0x09e3ed
+0x09ef72
+0x09faf7
+0x0a067d
+0x0a1204
+0x0a1d8b
+0x0a2913
+0x0a349b
+0x0a4023
+0x0a4bac
+0x0a5736
+0x0a62c0
+0x0a6e4a
+0x0a79d6
+0x0a8561
+0x0a90ed
+0x0a9c7a
+0x0aa807
+0x0ab394
+0x0abf22
+0x0acab1
+0x0ad640
+0x0ae1d0
+0x0aed60
+0x0af8f0
+0x0b0481
+0x0b1013
+0x0b1ba5
+0x0b2738
+0x0b32cb
+0x0b3e5e
+0x0b49f2
+0x0b5587
+0x0b611c
+0x0b6cb1
+0x0b7848
+0x0b83de
+0x0b8f75
+0x0b9b0d
+0x0ba6a5
+0x0bb23e
+0x0bbdd7
+0x0bc970
+0x0bd50a
+0x0be0a5
+0x0bec40
+0x0bf7dc
+0x0c0378
+0x0c0f14
+0x0c1ab1
+0x0c264f
+0x0c31ed
+0x0c3d8c
+0x0c492b
+0x0c54cb
+0x0c606b
+0x0c6c0b
+0x0c77ad
+0x0c834e
+0x0c8ef0
+0x0c9a93
+0x0ca636
+0x0cb1da
+0x0cbd7e
+0x0cc923
+0x0cd4c8
+0x0ce06e
+0x0cec14
+0x0cf7ba
+0x0d0362
+0x0d0f09
+0x0d1ab2
+0x0d265a
+0x0d3204
+0x0d3dad
+0x0d4957
+0x0d5502
+0x0d60ad
+0x0d6c59
+0x0d7805
+0x0d83b2
+0x0d8f5f
+0x0d9b0d
+0x0da6bc
+0x0db26a
+0x0dbe1a
+0x0dc9c9
+0x0dd57a
+0x0de12a
+0x0decdc
+0x0df88e
+0x0e0440
+0x0e0ff3
+0x0e1ba6
+0x0e275a
+0x0e330e
+0x0e3ec3
+0x0e4a79
+0x0e562e
+0x0e61e5
+0x0e6d9c
+0x0e7953
+0x0e850b
+0x0e90c3
+0x0e9c7c
+0x0ea836
+0x0eb3f0
+0x0ebfaa
+0x0ecb65
+0x0ed721
+0x0ee2dd
+0x0eee99
+0x0efa56
+0x0f0613
+0x0f11d1
+0x0f1d90
+0x0f294f
+0x0f350f
+0x0f40cf
+0x0f4c8f
+0x0f5850
+0x0f6412
+0x0f6fd4
+0x0f7b96
+0x0f875a
+0x0f931d
+0x0f9ee1
+0x0faaa6
+0x0fb66b
+0x0fc231
+0x0fcdf7
+0x0fd9bd
+0x0fe585
+0x0ff14c
+0x0ffd15
+0x1008dd
+0x1014a6
+0x102070
+0x102c3a
+0x103805
+0x1043d0
+0x104f9c
+0x105b68
+0x106735
+0x107303
+0x107ed0
+0x108a9f
+0x10966e
+0x10a23d
+0x10ae0d
+0x10b9dd
+0x10c5ae
+0x10d17f
+0x10dd51
+0x10e924
+0x10f4f7
+0x1100ca
+0x110c9e
+0x111873
+0x112448
+0x11301d
+0x113bf3
+0x1147ca
+0x1153a1
+0x115f78
+0x116b50
+0x117729
+0x118302
+0x118edb
+0x119ab6
+0x11a690
+0x11b26b
+0x11be47
+0x11ca23
+0x11d600
+0x11e1dd
+0x11edbb
+0x11f999
+0x120578
+0x121157
+0x121d37
+0x122917
+0x1234f8
+0x1240d9
+0x124cbb
+0x12589d
+0x126480
+0x127063
+0x127c47
+0x12882c
+0x129411
+0x129ff6
+0x12abdc
+0x12b7c2
+0x12c3a9
+0x12cf91
+0x12db79
+0x12e761
+0x12f34b
+0x12ff34
+0x130b1e
+0x131709
+0x1322f4
+0x132edf
+0x133acc
+0x1346b8
+0x1352a5
+0x135e93
+0x136a81
+0x137670
+0x13825f
+0x138e4f
+0x139a3f
+0x13a630
+0x13b221
+0x13be13
+0x13ca06
+0x13d5f8
+0x13e1ec
+0x13ede0
+0x13f9d4
+0x1405c9
+0x1411be
+0x141db4
+0x1429ab
+0x1435a2
+0x144199
+0x144d91
+0x14598a
+0x146583
+0x14717d
+0x147d77
+0x148971
+0x14956d
+0x14a168
+0x14ad64
+0x14b961
+0x14c55e
+0x14d15c
+0x14dd5a
+0x14e959
+0x14f559
+0x150158
+0x150d59
+0x15195a
+0x15255b
+0x15315d
+0x153d5f
+0x154962
+0x155566
+0x15616a
+0x156d6e
+0x157973
+0x158579
+0x15917f
+0x159d85
+0x15a98d
+0x15b594
+0x15c19c
+0x15cda5
+0x15d9ae
+0x15e5b8
+0x15f1c2
+0x15fdcd
+0x1609d8
+0x1615e4
+0x1621f0
+0x162dfd
+0x163a0b
+0x164618
+0x165227
+0x165e36
+0x166a45
+0x167655
+0x168266
+0x168e77
+0x169a88
+0x16a69a
+0x16b2ad
+0x16bec0
+0x16cad4
+0x16d6e8
+0x16e2fd
+0x16ef12
+0x16fb28
+0x17073e
+0x171355
+0x171f6c
+0x172b84
+0x17379c
+0x1743b5
+0x174fce
+0x175be8
+0x176803
+0x17741e
+0x178039
+0x178c55
+0x179872
+0x17a48f
+0x17b0ad
+0x17bccb
+0x17c8e9
+0x17d508
+0x17e128
+0x17ed48
+0x17f969
+0x18058a
+0x1811ac
+0x181dcf
+0x1829f1
+0x183615
+0x184239
+0x184e5d
+0x185a82
+0x1866a8
+0x1872ce
+0x187ef4
+0x188b1b
+0x189743
+0x18a36b
+0x18af94
+0x18bbbd
+0x18c7e6
+0x18d411
+0x18e03b
+0x18ec67
+0x18f892
+0x1904bf
+0x1910ec
+0x191d19
+0x192947
+0x193575
+0x1941a4
+0x194dd4
+0x195a04
+0x196634
+0x197266
+0x197e97
+0x198ac9
+0x1996fc
+0x19a32f
+0x19af63
+0x19bb97
+0x19c7cc
+0x19d401
+0x19e037
+0x19ec6d
+0x19f8a4
+0x1a04dc
+0x1a1114
+0x1a1d4c
+0x1a2985
+0x1a35bf
+0x1a41f9
+0x1a4e33
+0x1a5a6f
+0x1a66aa
+0x1a72e6
+0x1a7f23
+0x1a8b60
+0x1a979e
+0x1aa3dc
+0x1ab01b
+0x1abc5b
+0x1ac89b
+0x1ad4db
+0x1ae11c
+0x1aed5d
+0x1af9a0
+0x1b05e2
+0x1b1225
+0x1b1e69
+0x1b2aad
+0x1b36f2
+0x1b4337
+0x1b4f7d
+0x1b5bc3
+0x1b680a
+0x1b7451
+0x1b8099
+0x1b8ce1
+0x1b992a
+0x1ba574
+0x1bb1be
+0x1bbe08
+0x1bca53
+0x1bd69f
+0x1be2eb
+0x1bef38
+0x1bfb85
+0x1c07d3
+0x1c1421
+0x1c2070
+0x1c2cbf
+0x1c390f
+0x1c455f
+0x1c51b0
+0x1c5e02
+0x1c6a54
+0x1c76a6
+0x1c82f9
+0x1c8f4d
+0x1c9ba1
+0x1ca7f6
+0x1cb44b
+0x1cc0a1
+0x1cccf7
+0x1cd94e
+0x1ce5a5
+0x1cf1fd
+0x1cfe55
+0x1d0aae
+0x1d1708
+0x1d2362
+0x1d2fbc
+0x1d3c17
+0x1d4873
+0x1d54cf
+0x1d612c
+0x1d6d89
+0x1d79e7
+0x1d8645
+0x1d92a4
+0x1d9f03
+0x1dab63
+0x1db7c4
+0x1dc425
+0x1dd086
+0x1ddce8
+0x1de94b
+0x1df5ae
+0x1e0212
+0x1e0e76
+0x1e1adb
+0x1e2740
+0x1e33a6
+0x1e400c
+0x1e4c73
+0x1e58da
+0x1e6542
+0x1e71ab
+0x1e7e14
+0x1e8a7d
+0x1e96e8
+0x1ea352
+0x1eafbd
+0x1ebc29
+0x1ec895
+0x1ed502
+0x1ee170
+0x1eeddd
+0x1efa4c
+0x1f06bb
+0x1f132a
+0x1f1f9a
+0x1f2c0b
+0x1f387c
+0x1f44ee
+0x1f5160
+0x1f5dd3
+0x1f6a46
+0x1f76ba
+0x1f832e
+0x1f8fa3
+0x1f9c18
+0x1fa88e
+0x1fb505
+0x1fc17c
+0x1fcdf3
+0x1fda6b
+0x1fe6e4
+0x1ff35d
+0x1fffd7
+0x200c51
+0x2018cc
+0x202548
+0x2031c3
+0x203e40
+0x204abd
+0x20573a
+0x2063b9
+0x207037
+0x207cb6
+0x208936
+0x2095b6
+0x20a237
+0x20aeb8
+0x20bb3a
+0x20c7bd
+0x20d440
+0x20e0c3
+0x20ed47
+0x20f9cc
+0x210651
+0x2112d6
+0x211f5d
+0x212be3
+0x21386b
+0x2144f2
+0x21517b
+0x215e04
+0x216a8d
+0x217717
+0x2183a2
+0x21902d
+0x219cb8
+0x21a945
+0x21b5d1
+0x21c25f
+0x21ceec
+0x21db7b
+0x21e80a
+0x21f499
+0x220129
+0x220dba
+0x221a4b
+0x2226dc
+0x22336e
+0x224001
+0x224c94
+0x225928
+0x2265bd
+0x227251
+0x227ee7
+0x228b7d
+0x229813
+0x22a4aa
+0x22b142
+0x22bdda
+0x22ca73
+0x22d70c
+0x22e3a6
+0x22f040
+0x22fcdb
+0x230977
+0x231613
+0x2322af
+0x232f4c
+0x233bea
+0x234888
+0x235527
+0x2361c6
+0x236e66
+0x237b06
+0x2387a7
+0x239448
+0x23a0ea
+0x23ad8d
+0x23ba30
+0x23c6d4
+0x23d378
+0x23e01d
+0x23ecc2
+0x23f968
+0x24060e
+0x2412b5
+0x241f5c
+0x242c04
+0x2438ad
+0x244556
+0x245200
+0x245eaa
+0x246b55
+0x247800
+0x2484ac
+0x249158
+0x249e05
+0x24aab3
+0x24b761
+0x24c40f
+0x24d0bf
+0x24dd6e
+0x24ea1e
+0x24f6cf
+0x250381
+0x251033
+0x251ce5
+0x252998
+0x25364c
+0x254300
+0x254fb4
+0x255c69
+0x25691f
+0x2575d6
+0x25828c
+0x258f44
+0x259bfc
+0x25a8b4
+0x25b56d
+0x25c227
+0x25cee1
+0x25db9c
+0x25e857
+0x25f513
+0x2601cf
+0x260e8c
+0x261b4a
+0x262808
+0x2634c6
+0x264185
+0x264e45
+0x265b05
+0x2667c6
+0x267487
+0x268149
+0x268e0c
+0x269acf
+0x26a792
+0x26b456
+0x26c11b
+0x26cde0
+0x26daa6
+0x26e76c
+0x26f433
+0x2700fb
+0x270dc3
+0x271a8b
+0x272754
+0x27341e
+0x2740e8
+0x274db3
+0x275a7e
+0x27674a
+0x277416
+0x2780e3
+0x278db1
+0x279a7f
+0x27a74d
+0x27b41d
+0x27c0ec
+0x27cdbd
+0x27da8e
+0x27e75f
+0x27f431
+0x280103
+0x280dd6
+0x281aaa
+0x28277e
+0x283453
+0x284128
+0x284dfe
+0x285ad5
+0x2867ab
+0x287483
+0x28815b
+0x288e34
+0x289b0d
+0x28a7e7
+0x28b4c1
+0x28c19c
+0x28ce77
+0x28db53
+0x28e830
+0x28f50d
+0x2901ea
+0x290ec9
+0x291ba7
+0x292887
+0x293567
+0x294247
+0x294f28
+0x295c09
+0x2968ec
+0x2975ce
+0x2982b1
+0x298f95
+0x299c7a
+0x29a95e
+0x29b644
+0x29c32a
+0x29d011
+0x29dcf8
+0x29e9df
+0x29f6c8
+0x2a03b0
+0x2a109a
+0x2a1d84
+0x2a2a6e
+0x2a3759
+0x2a4445
+0x2a5131
+0x2a5e1e
+0x2a6b0b
+0x2a77f9
+0x2a84e7
+0x2a91d6
+0x2a9ec6
+0x2aabb6
+0x2ab8a6
+0x2ac598
+0x2ad289
+0x2adf7c
+0x2aec6f
+0x2af962
+0x2b0656
+0x2b134b
+0x2b2040
+0x2b2d35
+0x2b3a2c
+0x2b4723
+0x2b541a
+0x2b6112
+0x2b6e0a
+0x2b7b03
+0x2b87fd
+0x2b94f7
+0x2ba1f2
+0x2baeed
+0x2bbbe9
+0x2bc8e6
+0x2bd5e3
+0x2be2e0
+0x2befde
+0x2bfcdd
+0x2c09dc
+0x2c16dc
+0x2c23dc
+0x2c30dd
+0x2c3ddf
+0x2c4ae1
+0x2c57e4
+0x2c64e7
+0x2c71eb
+0x2c7eef
+0x2c8bf4
+0x2c98f9
+0x2ca5ff
+0x2cb306
+0x2cc00d
+0x2ccd15
+0x2cda1d
+0x2ce726
+0x2cf42f
+0x2d0139
+0x2d0e44
+0x2d1b4f
+0x2d285a
+0x2d3567
+0x2d4273
+0x2d4f81
+0x2d5c8f
+0x2d699d
+0x2d76ac
+0x2d83bc
+0x2d90cc
+0x2d9ddd
+0x2daaee
+0x2db800
+0x2dc512
+0x2dd226
+0x2ddf39
+0x2dec4d
+0x2df962
+0x2e0677
+0x2e138d
+0x2e20a4
+0x2e2dba
+0x2e3ad2
+0x2e47ea
+0x2e5503
+0x2e621c
+0x2e6f36
+0x2e7c50
+0x2e896b
+0x2e9687
+0x2ea3a3
+0x2eb0c0
+0x2ebddd
+0x2ecafb
+0x2ed819
+0x2ee538
+0x2ef257
+0x2eff77
+0x2f0c98
+0x2f19b9
+0x2f26db
+0x2f33fd
+0x2f4120
+0x2f4e44
+0x2f5b68
+0x2f688c
+0x2f75b2
+0x2f82d7
+0x2f8ffe
+0x2f9d25
+0x2faa4c
+0x2fb774
+0x2fc49d
+0x2fd1c6
+0x2fdef0
+0x2fec1a
+0x2ff945
+0x300670
+0x30139c
+0x3020c9
+0x302df6
+0x303b24
+0x304852
+0x305581
+0x3062b1</MemoryData>
+	</Node>
+	<Edge dst_node_id="48" dst_node_input="a" src_node_id="94" src_node_output="dout" />
+	<Edge dst_node_id="49" dst_node_input="b" src_node_id="94" src_node_output="dout" />
+	<Node group="[]" id="38" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Output latency="0" name="o" type="dfeOffsetFix(2, -2, UNSIGNED)" />
+		<Text>{HWOffsetFix:2, -2, UNSIGNED}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="89" dst_node_input="input" src_node_id="38" src_node_output="o" />
+	<Node group="[]" id="89" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeReinterpret">
+		<Input name="input" type="dfeOffsetFix(2, -2, UNSIGNED)" />
+		<Output latency="0" name="output" type="dfeBits(2)" />
+		<Text>&lt;{HWRawBits:2}&gt;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="90" dst_node_input="input" src_node_id="89" src_node_output="output" />
+	<Node group="[]" id="90" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeReinterpret">
+		<Input name="input" type="dfeBits(2)" />
+		<Output latency="0" name="output" type="dfeOffsetFix(2, 0, UNSIGNED)" />
+		<Text>&lt;{HWOffsetFix:2, 0, UNSIGNED}&gt;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="129" dst_node_input="input" src_node_id="90" src_node_output="output" />
+	<Node group="[]" id="129" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(2, 0, UNSIGNED)" />
+		<Output latency="1" name="output" type="dfeOffsetFix(2, 0, UNSIGNED)" />
+		<Text>FIFO(1)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="91" dst_node_input="addr" src_node_id="129" src_node_output="output" />
+	<Node group="[]" id="91" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeROM">
+		<Input name="addr" type="dfeOffsetFix(2, 0, UNSIGNED)" />
+		<Output latency="2" name="dout" type="dfeOffsetFix(24, -24, UNSIGNED)" />
+		<Text>ROM</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Depth>4</Depth>
+		<MemoryData>0x000000
+0x306fe1
+0x6a09e6
+0xae89fa</MemoryData>
+	</Node>
+	<Edge dst_node_id="44" dst_node_input="a" src_node_id="91" src_node_output="dout" />
+	<Edge dst_node_id="45" dst_node_input="b" src_node_id="91" src_node_output="dout" />
+	<Node group="[]" id="40" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Output latency="0" name="o" type="dfeOffsetFix(14, -26, UNSIGNED)" />
+		<Text>{HWOffsetFix:14, -26, UNSIGNED}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="118" dst_node_input="dsp_0_mult_0_a" src_node_id="40" src_node_output="o" />
+	<Node group="[]" id="118" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeAlteraDSP">
+		<Input name="dsp_0_mult_0_a" type="dfeOffsetFix(14, -26, UNSIGNED)" />
+		<Output latency="2" name="result" type="dfeOffsetFix(30, -40, TWOSCOMPLEMENT)" />
+		<Text>DSP IND18x18</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="119" dst_node_input="i" src_node_id="118" src_node_output="result" />
+	<Node group="[]" id="119" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeOffsetFix(30, -40, TWOSCOMPLEMENT)" />
+		<Output latency="0" name="o" type="dfeOffsetFix(28, -40, UNSIGNED)" />
+		<Text>{HWOffsetFix:28, -40, UNSIGNED}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="43" dst_node_input="i" src_node_id="119" src_node_output="o" />
+	<Node group="[]" id="43" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeOffsetFix(28, -40, UNSIGNED)" />
+		<Output latency="1" name="o" type="dfeOffsetFix(14, -26, UNSIGNED)" />
+		<Text>{HWOffsetFix:14, -26, UNSIGNED}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="44" dst_node_input="b" src_node_id="43" src_node_output="o" />
+	<Edge dst_node_id="45" dst_node_input="a" src_node_id="43" src_node_output="o" />
+	<Node group="[]" id="44" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeAdd">
+		<Input name="a" type="dfeOffsetFix(24, -24, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(14, -26, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(27, -26, UNSIGNED)" />
+		<Text>+</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="130" dst_node_input="input" src_node_id="44" src_node_output="result" />
+	<Node group="[]" id="130" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(27, -26, UNSIGNED)" />
+		<Output latency="1" name="output" type="dfeOffsetFix(27, -26, UNSIGNED)" />
+		<Text>FIFO(1)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="46" dst_node_input="a" src_node_id="130" src_node_output="output" />
+	<Node group="[]" id="45" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeMul">
+		<Input name="a" type="dfeOffsetFix(14, -26, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(24, -24, UNSIGNED)" />
+		<Output latency="2" name="result" type="dfeOffsetFix(38, -50, UNSIGNED)" />
+		<Text>*</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="46" dst_node_input="b" src_node_id="45" src_node_output="result" />
+	<Node group="[]" id="46" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeAdd">
+		<Input name="a" type="dfeOffsetFix(27, -26, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(38, -50, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(51, -50, UNSIGNED)" />
+		<Text>+</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="47" dst_node_input="i" src_node_id="46" src_node_output="result" />
+	<Node group="[]" id="47" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeOffsetFix(51, -50, UNSIGNED)" />
+		<Output latency="1" name="o" type="dfeOffsetFix(27, -26, UNSIGNED)" />
+		<Text>{HWOffsetFix:27, -26, UNSIGNED}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="48" dst_node_input="b" src_node_id="47" src_node_output="o" />
+	<Edge dst_node_id="49" dst_node_input="a" src_node_id="47" src_node_output="o" />
+	<Node group="[]" id="48" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeAdd">
+		<Input name="a" type="dfeOffsetFix(22, -24, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(27, -26, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(28, -26, UNSIGNED)" />
+		<Text>+</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="131" dst_node_input="input" src_node_id="48" src_node_output="result" />
+	<Node group="[]" id="131" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(28, -26, UNSIGNED)" />
+		<Output latency="1" name="output" type="dfeOffsetFix(28, -26, UNSIGNED)" />
+		<Text>FIFO(1)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="50" dst_node_input="a" src_node_id="131" src_node_output="output" />
+	<Node group="[]" id="49" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeMul">
+		<Input name="a" type="dfeOffsetFix(27, -26, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(22, -24, UNSIGNED)" />
+		<Output latency="2" name="result" type="dfeOffsetFix(49, -50, UNSIGNED)" />
+		<Text>*</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="50" dst_node_input="b" src_node_id="49" src_node_output="result" />
+	<Node group="[]" id="50" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeAdd">
+		<Input name="a" type="dfeOffsetFix(28, -26, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(49, -50, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(52, -50, UNSIGNED)" />
+		<Text>+</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="51" dst_node_input="i" src_node_id="50" src_node_output="result" />
+	<Node group="[]" id="51" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeOffsetFix(52, -50, UNSIGNED)" />
+		<Output latency="1" name="o" type="dfeOffsetFix(28, -26, UNSIGNED)" />
+		<Text>{HWOffsetFix:28, -26, UNSIGNED}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="52" dst_node_input="i" src_node_id="51" src_node_output="o" />
+	<Node group="[]" id="52" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeOffsetFix(28, -26, UNSIGNED)" />
+		<Output latency="1" name="o" type="dfeOffsetFix(24, -23, UNSIGNED)" />
+		<Text>{HWOffsetFix:24, -23, UNSIGNED}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="54" dst_node_input="a" src_node_id="52" src_node_output="o" />
+	<Edge dst_node_id="138" dst_node_input="input" src_node_id="52" src_node_output="o" />
+	<Node group="[]" id="154" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(24, -23, UNSIGNED)" />
+		<Text>{HWOffsetFix:24, -23, UNSIGNED}\n0x800000; 1.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>100000000000000000000000</Value>
+		<HexValue>0x800000</HexValue>
+		<NumericValue>1.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="54" dst_node_input="b" src_node_id="154" src_node_output="value" />
+	<Node group="[]" id="54" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeGte">
+		<Input name="a" type="dfeOffsetFix(24, -23, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(24, -23, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>&gt;=</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="56" dst_node_input="sel" src_node_id="54" src_node_output="result" />
+	<Edge dst_node_id="122" dst_node_input="condb" src_node_id="54" src_node_output="result" />
+	<Node group="[]" id="122" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCondTriAdd">
+		<Input name="a" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Input name="b" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Input name="c" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Input name="condb" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Text>3 +/0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="66" dst_node_input="a" src_node_id="122" src_node_output="result" />
+	<Edge dst_node_id="71" dst_node_input="a" src_node_id="122" src_node_output="result" />
+	<Edge dst_node_id="75" dst_node_input="i" src_node_id="122" src_node_output="result" />
+	<Node group="[]" id="153" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Text>{HWOffsetFix:11, 0, TWOSCOMPLEMENT}\n0x000; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>00000000000</Value>
+		<HexValue>0x000</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="66" dst_node_input="b" src_node_id="153" src_node_output="value" />
+	<Node group="[]" id="66" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeLt">
+		<Input name="a" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Input name="b" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>&lt;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="68" dst_node_input="a" src_node_id="66" src_node_output="result" />
+	<Node group="[]" id="152" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeFloat(8, 24)" />
+		<Text>{HWFloat:8, 24}\n0x00000000; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>00000000000000000000000000000000</Value>
+		<HexValue>0x00000000</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="29" dst_node_input="b" src_node_id="152" src_node_output="value" />
+	<Node group="[]" id="29" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeGt">
+		<Input name="a" type="dfeFloat(8, 24)" />
+		<Input name="b" type="dfeFloat(8, 24)" />
+		<Output latency="2" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>&gt;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="132" dst_node_input="input" src_node_id="29" src_node_output="result" />
+	<Node group="[]" id="132" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="6" name="output" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>FIFO(6)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="31" dst_node_input="a" src_node_id="132" src_node_output="output" />
+	<Node group="[]" id="30" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeDoubtBitOp">
+		<Input name="input" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Output latency="0" name="output" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>DoubtBitOp(GET_DOUBT)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="31" dst_node_input="b" src_node_id="30" src_node_output="output" />
+	<Node group="[]" id="31" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeAnd">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>&amp;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="133" dst_node_input="input" src_node_id="31" src_node_output="result" />
+	<Node group="[]" id="133" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="14" name="output" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>FIFO(14)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="67" dst_node_input="a" src_node_id="133" src_node_output="output" />
+	<Edge dst_node_id="144" dst_node_input="input" src_node_id="133" src_node_output="output" />
+	<Node group="[]" id="67" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeNot">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="0" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>~</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="68" dst_node_input="b" src_node_id="67" src_node_output="result" />
+	<Node group="[]" id="68" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeAnd">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>&amp;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="69" dst_node_input="a" src_node_id="68" src_node_output="result" />
+	<Node group="[]" id="151" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeFloat(8, 24)" />
+		<Text>{HWFloat:8, 24}\n0x00000000; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>00000000000000000000000000000000</Value>
+		<HexValue>0x00000000</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="33" dst_node_input="b" src_node_id="151" src_node_output="value" />
+	<Node group="[]" id="33" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeLt">
+		<Input name="a" type="dfeFloat(8, 24)" />
+		<Input name="b" type="dfeFloat(8, 24)" />
+		<Output latency="2" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>&lt;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="134" dst_node_input="input" src_node_id="33" src_node_output="result" />
+	<Node group="[]" id="134" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="6" name="output" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>FIFO(6)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="35" dst_node_input="a" src_node_id="134" src_node_output="output" />
+	<Node group="[]" id="34" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeDoubtBitOp">
+		<Input name="input" type="dfeOffsetFix(36, -26, TWOSCOMPLEMENT)" />
+		<Output latency="0" name="output" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>DoubtBitOp(GET_DOUBT)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="35" dst_node_input="b" src_node_id="34" src_node_output="output" />
+	<Node group="[]" id="35" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeAnd">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>&amp;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="136" dst_node_input="input" src_node_id="35" src_node_output="result" />
+	<Node group="[]" id="136" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="14" name="output" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>FIFO(14)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="72" dst_node_input="a" src_node_id="136" src_node_output="output" />
+	<Edge dst_node_id="145" dst_node_input="input" src_node_id="136" src_node_output="output" />
+	<Node group="[]" id="145" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="1" name="output" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>FIFO(1)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="69" dst_node_input="b" src_node_id="145" src_node_output="output" />
+	<Node group="[]" id="69" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeOr">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>|</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="79" dst_node_input="in0" src_node_id="69" src_node_output="result" />
+	<Node group="[]" id="150" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Text>{HWOffsetFix:11, 0, TWOSCOMPLEMENT}\n0x0ff; 255.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>00011111111</Value>
+		<HexValue>0x0ff</HexValue>
+		<NumericValue>255.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="71" dst_node_input="b" src_node_id="150" src_node_output="value" />
+	<Node group="[]" id="71" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeGte">
+		<Input name="a" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Input name="b" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>&gt;=</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="73" dst_node_input="a" src_node_id="71" src_node_output="result" />
+	<Node group="[]" id="72" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeNot">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="0" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>~</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="73" dst_node_input="b" src_node_id="72" src_node_output="result" />
+	<Node group="[]" id="73" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeAnd">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>&amp;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="74" dst_node_input="a" src_node_id="73" src_node_output="result" />
+	<Node group="[]" id="144" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="1" name="output" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>FIFO(1)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="74" dst_node_input="b" src_node_id="144" src_node_output="output" />
+	<Node group="[]" id="74" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeOr">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>|</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="79" dst_node_input="in1" src_node_id="74" src_node_output="result" />
+	<Node group="[]" id="79" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCat">
+		<Input name="in0" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="in1" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="0" name="result" type="dfeBits(2)" />
+		<Text>@</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="87" dst_node_input="sel" src_node_id="79" src_node_output="result" />
+	<Node group="[]" id="76" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:1, 0, UNSIGNED}\n0x0; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>0</Value>
+		<HexValue>0x0</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="77" dst_node_input="in0" src_node_id="76" src_node_output="value" />
+	<Node group="[]" id="75" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeOffsetFix(11, 0, TWOSCOMPLEMENT)" />
+		<Output latency="0" name="o" type="dfeOffsetFix(8, 0, TWOSCOMPLEMENT)" />
+		<Text>{HWOffsetFix:8, 0, TWOSCOMPLEMENT}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="139" dst_node_input="input" src_node_id="75" src_node_output="o" />
+	<Node group="[]" id="139" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(8, 0, TWOSCOMPLEMENT)" />
+		<Output latency="3" name="output" type="dfeOffsetFix(8, 0, TWOSCOMPLEMENT)" />
+		<Text>FIFO(3)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="77" dst_node_input="in1" src_node_id="139" src_node_output="output" />
+	<Node group="[]" id="138" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(24, -23, UNSIGNED)" />
+		<Output latency="1" name="output" type="dfeOffsetFix(24, -23, UNSIGNED)" />
+		<Text>FIFO(1)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="56" dst_node_input="option0" src_node_id="138" src_node_output="output" />
+	<Node group="[]" id="55" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(24, -23, UNSIGNED)" />
+		<Text>{HWOffsetFix:24, -23, UNSIGNED}\n0x000000; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>000000000000000000000000</Value>
+		<HexValue>0x000000</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="56" dst_node_input="option1" src_node_id="55" src_node_output="value" />
+	<Node group="[]" id="56" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeMux">
+		<Input name="sel" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="option0" type="dfeOffsetFix(24, -23, UNSIGNED)" />
+		<Input name="option1" type="dfeOffsetFix(24, -23, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(24, -23, UNSIGNED)" />
+		<Text>MUX</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="57" dst_node_input="i" src_node_id="56" src_node_output="result" />
+	<Node group="[]" id="57" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCast">
+		<Input name="i" type="dfeOffsetFix(24, -23, UNSIGNED)" />
+		<Output latency="0" name="o" type="dfeOffsetFix(23, -23, UNSIGNED)" />
+		<Text>{HWOffsetFix:23, -23, UNSIGNED}</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="140" dst_node_input="input" src_node_id="57" src_node_output="o" />
+	<Node group="[]" id="140" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(23, -23, UNSIGNED)" />
+		<Output latency="3" name="output" type="dfeOffsetFix(23, -23, UNSIGNED)" />
+		<Text>FIFO(3)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="77" dst_node_input="in2" src_node_id="140" src_node_output="output" />
+	<Node group="[]" id="77" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCat">
+		<Input name="in0" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="in1" type="dfeOffsetFix(8, 0, TWOSCOMPLEMENT)" />
+		<Input name="in2" type="dfeOffsetFix(23, -23, UNSIGNED)" />
+		<Output latency="0" name="result" type="dfeBits(32)" />
+		<Text>@</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="78" dst_node_input="input" src_node_id="77" src_node_output="result" />
+	<Node group="[]" id="78" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeReinterpret">
+		<Input name="input" type="dfeBits(32)" />
+		<Output latency="0" name="output" type="dfeFloat(8, 24)" />
+		<Text>&lt;{HWFloat:8, 24}&gt;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="87" dst_node_input="option0" src_node_id="78" src_node_output="output" />
+	<Node group="[]" id="80" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:1, 0, UNSIGNED}\n0x0; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>0</Value>
+		<HexValue>0x0</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="82" dst_node_input="in0" src_node_id="80" src_node_output="value" />
+	<Node group="[]" id="81" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(8, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:8, 0, UNSIGNED}\n0xff; 255.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>11111111</Value>
+		<HexValue>0xff</HexValue>
+		<NumericValue>255.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="82" dst_node_input="in1" src_node_id="81" src_node_output="value" />
+	<Node group="[]" id="82" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCat">
+		<Input name="in0" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="in1" type="dfeOffsetFix(8, 0, UNSIGNED)" />
+		<Output latency="0" name="result" type="dfeBits(9)" />
+		<Text>@</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="84" dst_node_input="in0" src_node_id="82" src_node_output="result" />
+	<Node group="[]" id="83" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(23, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:23, 0, UNSIGNED}\n0x000000; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>00000000000000000000000</Value>
+		<HexValue>0x000000</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="84" dst_node_input="in1" src_node_id="83" src_node_output="value" />
+	<Node group="[]" id="84" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeCat">
+		<Input name="in0" type="dfeBits(9)" />
+		<Input name="in1" type="dfeOffsetFix(23, 0, UNSIGNED)" />
+		<Output latency="0" name="result" type="dfeBits(32)" />
+		<Text>@</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="85" dst_node_input="input" src_node_id="84" src_node_output="result" />
+	<Node group="[]" id="85" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeReinterpret">
+		<Input name="input" type="dfeBits(32)" />
+		<Output latency="0" name="output" type="dfeFloat(8, 24)" />
+		<Text>&lt;{HWFloat:8, 24}&gt;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="87" dst_node_input="option1" src_node_id="85" src_node_output="output" />
+	<Edge dst_node_id="87" dst_node_input="option3" src_node_id="85" src_node_output="output" />
+	<Node group="[]" id="86" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeFloat(8, 24)" />
+		<Text>{HWFloat:8, 24}\n0x00000000; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>00000000000000000000000000000000</Value>
+		<HexValue>0x00000000</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="87" dst_node_input="option2" src_node_id="86" src_node_output="value" />
+	<Node group="[]" id="87" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeMux">
+		<Input name="sel" type="dfeBits(2)" />
+		<Input name="option0" type="dfeFloat(8, 24)" />
+		<Input name="option1" type="dfeFloat(8, 24)" />
+		<Input name="option2" type="dfeFloat(8, 24)" />
+		<Input name="option3" type="dfeFloat(8, 24)" />
+		<Output latency="1" name="result" type="dfeFloat(8, 24)" />
+		<Text>MUX</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.KernelMath.exp(KernelMath.java:727)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="95" dst_node_input="b" src_node_id="87" src_node_output="result" />
+	<Node group="[]" id="95" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeMul">
+		<Input name="a" type="dfeFloat(8, 24)" />
+		<Input name="b" type="dfeFloat(8, 24)" />
+		<Output latency="11" name="result" type="dfeFloat(8, 24)" />
+		<Text>*</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mul(DFEVar.java:968)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="96" dst_node_input="a" src_node_id="95" src_node_output="result" />
+	<Node group="[]" id="149" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(8, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:8, 0, UNSIGNED}\n0x00; 0.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:597)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:44)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Value>00000000</Value>
+		<HexValue>0x00</HexValue>
+		<NumericValue>0.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="13" dst_node_input="b" src_node_id="149" src_node_output="value" />
+	<Node group="[]" id="13" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeEq">
+		<Input name="a" type="dfeOffsetFix(8, 0, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(8, 0, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>==</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.eq(DFEVar.java:597)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:44)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="16" dst_node_input="a" src_node_id="13" src_node_output="result" />
+	<Node group="[]" id="14" isControl="true" isVisible="false" pipelineFactor="1.0" type="NodeInputMappedReg">
+		<Output latency="0" name="io_y_force_disabled" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>Scalar input (io_y_force_disabled)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:44)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Name>io_y_force_disabled</Name>
+	</Node>
+	<Edge dst_node_id="15" dst_node_input="a" src_node_id="14" src_node_output="io_y_force_disabled" />
+	<Node group="[]" id="15" isControl="true" isVisible="false" pipelineFactor="0.0" type="NodeNot">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="0" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>~</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:44)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="16" dst_node_input="b" src_node_id="15" src_node_output="result" />
+	<Node group="[]" id="16" isControl="false" isVisible="false" pipelineFactor="0.0" type="NodeAnd">
+		<Input name="a" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="0" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>&amp;</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:44)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="142" dst_node_input="input" src_node_id="16" src_node_output="result" />
+	<Node group="[]" id="142" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeFIFO">
+		<Input name="input" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="48" name="output" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>FIFO(48)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="17" dst_node_input="enable" src_node_id="142" src_node_output="output" />
+	<Node group="[]" id="17" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeInput">
+		<Input name="enable" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Output latency="5" name="data" type="dfeFloat(8, 24)" />
+		<Text>Input(y)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.input(IO.java:522)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:44)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Name>y</Name>
+	</Node>
+	<Edge dst_node_id="96" dst_node_input="b" src_node_id="17" src_node_output="data" />
+	<Node group="[]" id="96" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeSub">
+		<Input name="a" type="dfeFloat(8, 24)" />
+		<Input name="b" type="dfeFloat(8, 24)" />
+		<Output latency="14" name="result" type="dfeFloat(8, 24)" />
+		<Text>-</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.sub(DFEVar.java:922)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="98" dst_node_input="b" src_node_id="96" src_node_output="result" />
+	<Node group="[]" id="98" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeMul">
+		<Input name="a" type="dfeFloat(8, 24)" />
+		<Input name="b" type="dfeFloat(8, 24)" />
+		<Output latency="11" name="result" type="dfeFloat(8, 24)" />
+		<Text>*</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.mulAsRHS(DFEVar.java:993)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="99" dst_node_input="b" src_node_id="98" src_node_output="result" />
+	<Node group="[]" id="99" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeSub">
+		<Input name="a" type="dfeFloat(8, 24)" />
+		<Input name="b" type="dfeFloat(8, 24)" />
+		<Output latency="14" name="result" type="dfeFloat(8, 24)" />
+		<Text>-</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.types.base.DFEVar.sub(DFEVar.java:922)
+movingaveragesimple.MovingAverageSimpleKernel.step(MovingAverageSimpleKernel.maxj:60)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:49)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="125" dst_node_input="input" src_node_id="99" src_node_output="result" />
+	<Edge dst_node_id="105" dst_node_input="data" src_node_id="99" src_node_output="result" />
+	<Node group="[]" id="105" isControl="false" isVisible="true" pipelineFactor="1.0" type="NodeOutput">
+		<Input name="output_control" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="data" type="dfeFloat(8, 24)" />
+		<Text>Output(beta)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.kernelcompiler.stdlib.core.IO.output(IO.java:816)
+movingaveragesimple.MovingAverageSimpleKernel.&lt;init&gt;(MovingAverageSimpleKernel.maxj:51)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:22)</OriginStackTrace>
+		<Name>beta</Name>
+	</Node>
+	<Node group="[]" id="110" isControl="false" isVisible="false" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+		<Value>1</Value>
+		<HexValue>0x1</HexValue>
+		<NumericValue>1.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="111" dst_node_input="load" src_node_id="110" src_node_output="value" />
+	<Node group="[]" id="148" isControl="false" isVisible="false" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+		<Value>1</Value>
+		<HexValue>0x1</HexValue>
+		<NumericValue>1.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="108" dst_node_input="enable" src_node_id="148" src_node_output="value" />
+	<Node group="[]" id="107" isControl="false" isVisible="false" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(49, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:49, 0, UNSIGNED}\n0x1000000000000; 2.81474976710656E14</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+		<Value>1000000000000000000000000000000000000000000000000</Value>
+		<HexValue>0x1000000000000</HexValue>
+		<NumericValue>2.81474976710656E14</NumericValue>
+	</Node>
+	<Edge dst_node_id="108" dst_node_input="max" src_node_id="107" src_node_output="value" />
+	<Node group="[]" id="108" isControl="false" isVisible="false" pipelineFactor="1.0" type="NodeCounterV1">
+		<Input name="enable" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="max" type="dfeOffsetFix(49, 0, UNSIGNED)" />
+		<Output latency="0" name="count" type="dfeOffsetFix(48, 0, UNSIGNED)" />
+		<Output latency="0" name="wrap" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+		<Increment>1</Increment>
+		<WrapValue>0</WrapValue>
+		<InitValue>0</InitValue>
+		<CountMode>NUMERIC_INCREMENTING</CountMode>
+		<WrapMode>COUNT_LT_MAX_THEN_WRAP</WrapMode>
+	</Node>
+	<Edge dst_node_id="109" dst_node_input="input" src_node_id="108" src_node_output="count" />
+	<Node group="[]" id="109" isControl="false" isVisible="false" pipelineFactor="1.0" type="NodeStreamOffset">
+		<Input name="input" type="dfeOffsetFix(48, 0, UNSIGNED)" />
+		<Output latency="1" name="output" type="dfeOffsetFix(48, 0, UNSIGNED)" />
+		<Text>stream offset: 1</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="111" dst_node_input="data" src_node_id="109" src_node_output="output" />
+	<Node group="[]" id="111" isControl="false" isVisible="false" pipelineFactor="1.0" type="NodeOutputMappedReg">
+		<Input name="load" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="data" type="dfeOffsetFix(48, 0, UNSIGNED)" />
+		<Text>Scalar output (current_run_cycle_count)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+		<Name>current_run_cycle_count</Name>
+	</Node>
+	<Node group="[]" id="147" isControl="false" isVisible="false" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:1, 0, UNSIGNED}\n0x1; 1.0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+		<Value>1</Value>
+		<HexValue>0x1</HexValue>
+		<NumericValue>1.0</NumericValue>
+	</Node>
+	<Edge dst_node_id="114" dst_node_input="enable" src_node_id="147" src_node_output="value" />
+	<Node group="[]" id="113" isControl="false" isVisible="false" pipelineFactor="1.0" type="NodeConstantRawBits">
+		<Output latency="0" name="value" type="dfeOffsetFix(49, 0, UNSIGNED)" />
+		<Text>{HWOffsetFix:49, 0, UNSIGNED}\n0x1000000000000; 2.81474976710656E14</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+		<Value>1000000000000000000000000000000000000000000000000</Value>
+		<HexValue>0x1000000000000</HexValue>
+		<NumericValue>2.81474976710656E14</NumericValue>
+	</Node>
+	<Edge dst_node_id="114" dst_node_input="max" src_node_id="113" src_node_output="value" />
+	<Node group="[]" id="114" isControl="false" isVisible="false" pipelineFactor="1.0" type="NodeCounterV1">
+		<Input name="enable" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Input name="max" type="dfeOffsetFix(49, 0, UNSIGNED)" />
+		<Output latency="0" name="count" type="dfeOffsetFix(48, 0, UNSIGNED)" />
+		<Output latency="0" name="wrap" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>Counter(NUMERIC_INCREMENTING)\nInc: 1\nReset: 0\nInit: 0</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+		<Increment>1</Increment>
+		<WrapValue>0</WrapValue>
+		<InitValue>0</InitValue>
+		<CountMode>NUMERIC_INCREMENTING</CountMode>
+		<WrapMode>COUNT_LT_MAX_THEN_WRAP</WrapMode>
+	</Node>
+	<Edge dst_node_id="117" dst_node_input="a" src_node_id="114" src_node_output="count" />
+	<Node group="[]" id="116" isControl="true" isVisible="false" pipelineFactor="1.0" type="NodeInputMappedReg">
+		<Output latency="0" name="run_cycle_count" type="dfeOffsetFix(48, 0, UNSIGNED)" />
+		<Text>Scalar input (run_cycle_count)</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+		<Name>run_cycle_count</Name>
+	</Node>
+	<Edge dst_node_id="117" dst_node_input="b" src_node_id="116" src_node_output="run_cycle_count" />
+	<Node group="[]" id="117" isControl="false" isVisible="false" pipelineFactor="1.0" type="NodeEq">
+		<Input name="a" type="dfeOffsetFix(48, 0, UNSIGNED)" />
+		<Input name="b" type="dfeOffsetFix(48, 0, UNSIGNED)" />
+		<Output latency="1" name="result" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>==</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+	<Edge dst_node_id="115" dst_node_input="start" src_node_id="117" src_node_output="result" />
+	<Node group="[]" id="115" isControl="false" isVisible="false" pipelineFactor="1.0" type="NodeFlush">
+		<Input name="start" type="dfeOffsetFix(1, 0, UNSIGNED)" />
+		<Text>flush on trigger</Text>
+		<OriginStackTrace>com.maxeler.maxcompiler.v2.managers.DFEManager.build(DFEManager.java:373)
+movingaveragesimple.MovingAverageSimpleManager.main(MovingAverageSimpleManager.maxj:27)</OriginStackTrace>
+	</Node>
+</Graph>
