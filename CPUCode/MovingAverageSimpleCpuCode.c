@@ -21,7 +21,7 @@ int main()
   y = malloc(dataPoints * sizeof(float));
    loadObservations(
    	"../data/poisson.y",
-   	&y,
+   	y,
    	&dataPoints);
 
    for (int i=0;i<dataPoints;++i)
@@ -32,7 +32,7 @@ int main()
     /* float x[dataPoints]; */
     loadObservations(
 	"../data/poisson.y",
-	&x,
+	x,
 	&dataPoints);
 
     printf("Running DFE\n");
