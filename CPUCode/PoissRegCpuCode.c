@@ -8,6 +8,7 @@
  */
 #include "Maxfiles.h" 			// Includes .max files
 #include <MaxSLiCInterface.h>	// Simple Live CPU interface
+#include "poissIO.h"
 
 const int dataPoints = 20; 
 
@@ -20,10 +21,22 @@ float beta_hat;
 
 int main()
 {
-	printf("Running DFE\n");
-	PoissReg(dataPoints, x, y, beta_hat);
+    float * y = malloc(length * sizeof(float));  
+    loadObservations(
+	"../data/poisson.y",
+	&y,
+	&length);
+
+    float * x = malloc(length * sizeof(float));  
+    loadObservations(
+	"../data/poisson.y",
+	&x,
+	&length);
+
+    printf("Running DFE\n");
+    PoissReg(dataPoints, x, y, beta_hat);
 
     printf("estimate beta %f\n",beta_hat);
     
-	return 0;
+    return 0;
 }
