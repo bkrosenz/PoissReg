@@ -21,13 +21,13 @@ float beta_hat;
 
 int main()
 {
-    float * y = malloc(dataPoints * sizeof(float));  
+    float y = malloc(dataPoints * sizeof(float));  
     loadObservations(
 	"../data/poisson.y",
 	&y,
 	&dataPoints);
 
-    float * x = malloc(dataPoints * sizeof(float));  
+    float x = malloc(dataPoints * sizeof(float));  
     loadObservations(
 	"../data/poisson.y",
 	&x,
