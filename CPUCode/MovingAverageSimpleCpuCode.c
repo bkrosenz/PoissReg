@@ -34,7 +34,7 @@ int main()
 	&dataPoints);
 
     printf("Running DFE\n");
-    PoissReg(dataPoints, x, y, beta_hat);
+    MovingAverageSimple(dataPoints, x, y, beta_hat);
 
     printf("estimate beta %f\n",beta_hat);
     
