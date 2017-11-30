@@ -12,11 +12,6 @@
 
 const int dataPoints = 1000; 
 
-// simdata w/ beta=3
-/* float x[dataPoints] = {6.6,  3.6,  3.1,  5.1,  2.1,  6.1,  1.6,  7.1,  0.6,  5.6,  1.1, */
-/*         8.1,  0.1,  9.1,  2.6,  7.6,  4.1,  4.6,  9.6,  8.6}; */
-/* float y[dataPoints] = {24, 9, 7, 20, 7, 12, 6, 27, 0, 19, 3, 29, 0, 35, 9, 14, 11, 12, 30, 25}; */
-
 int main()
 {
     /* float y[dataPoints]; */
