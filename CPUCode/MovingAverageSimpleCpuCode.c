@@ -25,7 +25,7 @@ int main()
    	&dataPoints);
 
    for (int i=0;i<dataPoints;++i)
-     printf("%f ",y[i];
+     printf("%f ",y[i]);
 	    
     float * x;
     x == malloc(dataPoints * sizeof(float));
