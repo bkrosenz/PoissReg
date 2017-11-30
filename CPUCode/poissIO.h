@@ -50,7 +50,7 @@ void loadObservations(char *filename, float *dest, const int *length)
       perror("Error opening observations file.\n");
     }
 
-  dest = malloc((*length) * sizeof(int));
+  dest = malloc((*length) * sizeof(float));
   char* line = NULL;
   size_t len = 0;
   int i = 0;
