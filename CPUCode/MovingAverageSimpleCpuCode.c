@@ -19,11 +19,14 @@ int main()
 
  float * y;
   y = malloc(dataPoints * sizeof(float));
-    loadObservations(
-	"../data/poisson.y",
-	&y,
-	&dataPoints);
+   loadObservations(
+   	"../data/poisson.y",
+   	&y,
+   	&dataPoints);
 
+   for (int i=0;i<dataPoints;++i)
+     printf("%f ",y[i];
+	    
     float * x;
     x == malloc(dataPoints * sizeof(float));
     /* float x[dataPoints]; */
