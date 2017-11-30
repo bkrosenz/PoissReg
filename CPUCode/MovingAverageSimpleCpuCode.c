@@ -8,6 +8,10 @@
  */
 #include "Maxfiles.h" 			// Includes .max files
 #include <MaxSLiCInterface.h>	// Simple Live CPU interface
+
+#include <stdlib.h>
+#include <stdint.h>
+#include <stdio.h>
 #include "poissIO.h"
 
 const int dataPoints = 1000; 
@@ -41,4 +45,25 @@ int main()
     printf("estimate beta %f\n",beta_hat);
     
     return 0;
+}
+
+
+void loadObservations(char *filename, float *dest, const int *length)
+{
+  FILE *file = fopen(filename, "r");
+  if (file == NULL)
+    {
+      perror("Error opening observations file.\n");
+    }
+
+//  dest = malloc((*length) * sizeof(float));
+  char* line = NULL;
+  size_t len = 0;
+  int i = 0;
+  while ( getline(&line, &len, file) != -1)
+    {
+	dest[i++] = strtof(line,NULL);
+    }    
+    fclose(file);
+    return;
 }
