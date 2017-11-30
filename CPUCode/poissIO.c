@@ -23,15 +23,8 @@ void loadObservations(char *filename, float *dest, const int *length)
   int i = 0;
   while ( getline(&line, &len, file) != -1)
     {
-      //  printf("%d %s\n", i, line);
 	dest[i++] = strtof(line,NULL);
-    }
-  /*       exit(1); */
-    /*   dest[i] = atoi(buf); */
-    /*   ++i; */
-    /* } */
-    //(file, "%d\n", &dest[i]))
-    
+    }    
     fclose(file);
     return;
 }
