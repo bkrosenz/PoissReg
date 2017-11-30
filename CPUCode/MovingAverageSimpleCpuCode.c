@@ -8,23 +8,35 @@
  */
 #include "Maxfiles.h" 			// Includes .max files
 #include <MaxSLiCInterface.h>	// Simple Live CPU interface
+#include "poissIO.h"
 
-const int dataPoints = 20; 
+const int dataPoints = 1000; 
 
-float beta_hat[20]; 
+// simdata w/ beta=3
+/* float x[dataPoints] = {6.6,  3.6,  3.1,  5.1,  2.1,  6.1,  1.6,  7.1,  0.6,  5.6,  1.1, */
+/*         8.1,  0.1,  9.1,  2.6,  7.6,  4.1,  4.6,  9.6,  8.6}; */
+/* float y[dataPoints] = {24, 9, 7, 20, 7, 12, 6, 27, 0, 19, 3, 29, 0, 35, 9, 14, 11, 12, 30, 25}; */
+
+float beta_hat;
 
 int main()
 {
-    
-// simdata w/ beta=3
-    float x[20] = {6.6,  3.6,  3.1,  5.1,  2.1,  6.1,  1.6,  7.1,  0.6,  5.6,  1.1, 8.1,  0.1,  9.1,  2.6,  7.6,  4.1,  4.6,  9.6,  8.6};
-    float y[20] = {24, 9, 7, 20, 7, 12, 6, 27, 0, 19, 3, 29, 0, 35, 9, 14, 11, 12, 30, 25};
+    float * y = malloc(dataPoints * sizeof(float));  
+    loadObservations(
+	"../data/poisson.y",
+	&y,
+	&dataPoints);
 
-	printf("Running DFE\n");
-	MovingAverageSimple(dataPoints, x, y, &beta_hat);
+    float * x = malloc(dataPoints * sizeof(float));  
+    loadObservations(
+	"../data/poisson.y",
+	&x,
+	&dataPoints);
 
-    for (int i=0;i<dataPoints;++i)
-        printf("estimate beta %d: %f\n",i,beta_hat[i]);
+    printf("Running DFE\n");
+    PoissReg(dataPoints, x, y, beta_hat);
+
+    printf("estimate beta %f\n",beta_hat);
     
-	return 0;
+    return 0;
 }

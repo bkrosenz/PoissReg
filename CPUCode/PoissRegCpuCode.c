@@ -10,7 +10,7 @@
 #include <MaxSLiCInterface.h>	// Simple Live CPU interface
 #include "poissIO.h"
 
-const int length = 1000; 
+const int dataPoints = 1000; 
 
 // simdata w/ beta=3
 /* float x[dataPoints] = {6.6,  3.6,  3.1,  5.1,  2.1,  6.1,  1.6,  7.1,  0.6,  5.6,  1.1, */
@@ -21,17 +21,17 @@ float beta_hat;
 
 int main()
 {
-    float * y = malloc(length * sizeof(float));  
+    float * y = malloc(dataPoints * sizeof(float));  
     loadObservations(
 	"../data/poisson.y",
 	&y,
-	&length);
+	&dataPoints);
 
-    float * x = malloc(length * sizeof(float));  
+    float * x = malloc(dataPoints * sizeof(float));  
     loadObservations(
 	"../data/poisson.y",
 	&x,
-	&length);
+	&dataPoints);
 
     printf("Running DFE\n");
     PoissReg(dataPoints, x, y, beta_hat);
