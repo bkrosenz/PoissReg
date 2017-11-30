@@ -42,7 +42,7 @@ void loadMatrix(char *fname, uint32_t **dest, const int *rows, const int *cols)
   return;
 }
 
-void loadObservations(char *filename, uint32_t *dest, const int *length)
+void loadObservations(char *filename, float *dest, const int *length)
 {
   FILE *file = fopen(filename, "r");
   if (file == NULL)
