@@ -24,7 +24,7 @@ int main()
   float * y;
   y = malloc(dataPoints * sizeof(float));
   loadObservations(
-		   "../data/poisson.y",
+		   "data/poisson.y",
 		   y,
 		   &dataPoints);
 
@@ -35,7 +35,7 @@ int main()
   x == malloc(dataPoints * sizeof(float));
   /* float x[dataPoints]; */
   loadObservations(
-		   "../data/poisson.y",
+		   "data/poisson.y",
 		   x,
 		   &dataPoints);
 
