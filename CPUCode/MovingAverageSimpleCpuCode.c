@@ -14,6 +14,8 @@
 #include <stdio.h>
 /* #include "poissIO.h" */
 
+void loadObservations(char *filename, float *dest, const int *length);
+
 const int dataPoints = 1000; 
 
 int main()
