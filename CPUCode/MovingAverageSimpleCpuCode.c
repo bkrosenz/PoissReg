@@ -18,33 +18,33 @@ const int dataPoints = 1000;
 
 int main()
 {
-    /* float y[dataPoints]; */
+  /* float y[dataPoints]; */
   float beta_hat;
 
- float * y;
+  float * y;
   y = malloc(dataPoints * sizeof(float));
-   loadObservations(
-   	"../data/poisson.y",
-   	y,
-   	&dataPoints);
+  loadObservations(
+		   "../data/poisson.y",
+		   y,
+		   &dataPoints);
 
-   for (int i=0;i<dataPoints;++i)
-     printf("%f ",y[i]);
+  for (int i=0;i<dataPoints;++i)
+    printf("%f ",y[i]);
 	    
-    float * x;
-    x == malloc(dataPoints * sizeof(float));
-    /* float x[dataPoints]; */
-    loadObservations(
-	"../data/poisson.y",
-	x,
-	&dataPoints);
+  float * x;
+  x == malloc(dataPoints * sizeof(float));
+  /* float x[dataPoints]; */
+  loadObservations(
+		   "../data/poisson.y",
+		   x,
+		   &dataPoints);
 
-    printf("Running DFE\n");
-    MovingAverageSimple(dataPoints, x, y, &beta_hat);
+  printf("Running DFE\n");
+  MovingAverageSimple(dataPoints, x, y, beta_hat);
 
-    printf("estimate beta %f\n",beta_hat);
+  printf("estimate beta %f\n",beta_hat);
     
-    return 0;
+  return 0;
 }
 
 
@@ -55,15 +55,14 @@ void loadObservations(char *filename, float *dest, const int *length)
     {
       perror("Error opening observations file.\n");
     }
-
-//  dest = malloc((*length) * sizeof(float));
+  //  dest = malloc((*length) * sizeof(float));
   char* line = NULL;
   size_t len = 0;
   int i = 0;
   while ( getline(&line, &len, file) != -1)
     {
-	dest[i++] = strtof(line,NULL);
+      dest[i++] = strtof(line,NULL);
     }    
-    fclose(file);
-    return;
+  fclose(file);
+  return;
 }
